@@ -1,6 +1,11 @@
 
 # we don't want to commit any changes to the wrapper
-gradle
+gradle*
 
 # don't care about the temp/cache/local config dirs
-.gradle
+.gradle/
+/build/
+/bin/
+.project
+.classpath
+.settings*
