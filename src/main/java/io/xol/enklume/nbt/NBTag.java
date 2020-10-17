@@ -89,6 +89,8 @@ public abstract class NBTag
 			return new NBTByteArray();
 		case TAG_INT_ARRAY:
 			return new NBTIntArray();
+		case TAG_LONG_ARRAY:
+			return new NBTLongArray();
 		default:
 			System.out.println("Unknow type : " + t.name());
 			break;
@@ -98,6 +100,6 @@ public abstract class NBTag
 
 	public enum Type
 	{
-		TAG_END, TAG_BYTE, TAG_SHORT, TAG_INT, TAG_LONG, TAG_FLOAT, TAG_DOUBLE, TAG_BYTE_ARRAY, TAG_STRING, TAG_LIST, TAG_COMPOUND, TAG_INT_ARRAY;
+		TAG_END, TAG_BYTE, TAG_SHORT, TAG_INT, TAG_LONG, TAG_FLOAT, TAG_DOUBLE, TAG_BYTE_ARRAY, TAG_STRING, TAG_LIST, TAG_COMPOUND, TAG_INT_ARRAY, TAG_LONG_ARRAY;
 	}
 }
