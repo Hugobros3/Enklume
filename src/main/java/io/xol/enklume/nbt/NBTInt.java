@@ -9,10 +9,7 @@ public class NBTInt extends NBTNamed{
 	@Override
 	void feed(DataInputStream is) throws IOException {
 		super.feed(is);
-		data = is.read() << 24;
-		data += is.read() << 16;
-		data += is.read() << 8;
-		data += is.read();
+		data = is.readInt();
 	}
 
 	public int getData()

@@ -10,15 +10,7 @@ public class NBTDouble extends NBTNamed{
 	@Override
 	void feed(DataInputStream is) throws IOException {
 		super.feed(is);
-		
-		byte[] bytes = new byte[8];
-		try {
-			is.readFully(bytes);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		data = ByteBuffer.wrap(bytes).getDouble();
+		data = is.readDouble();
 	}
 	
 	public double getData()

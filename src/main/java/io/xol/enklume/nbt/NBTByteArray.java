@@ -12,14 +12,11 @@ public class NBTByteArray extends NBTNamed {
 	@Override
 	void feed(DataInputStream is) throws IOException {
 		super.feed(is);
-		size = is.read() << 24;
-		size += is.read() << 16;
-		size += is.read() << 8;
-		size += is.read();
+		size = is.readInt();
 		//System.out.println("byte array of "+size+"b");
 		data = new byte[size];
 		try {
-			is.read(data);
+			is.readFully(data);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

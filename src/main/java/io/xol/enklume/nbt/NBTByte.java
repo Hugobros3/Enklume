@@ -9,6 +9,6 @@ public class NBTByte extends NBTNamed{
 	@Override
 	void feed(DataInputStream is) throws IOException {
 		super.feed(is);
-		data = (byte)is.read();
+		data = is.readByte();
 	}
 }
