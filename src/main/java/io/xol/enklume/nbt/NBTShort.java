@@ -9,8 +9,6 @@ public class NBTShort extends NBTNamed{
 	@Override
 	void feed(DataInputStream is) throws IOException {
 		super.feed(is);
-		int i = is.read() << 8;
-		i += is.read();
-		data = (short)i;
+		data = is.readShort();
 	}
 }

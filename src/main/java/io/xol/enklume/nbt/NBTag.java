@@ -92,7 +92,7 @@ public abstract class NBTag
 		case TAG_LONG_ARRAY:
 			return new NBTLongArray();
 		default:
-			System.out.println("Unknow type : " + t.name());
+			System.out.println("Unknown type : " + t.name());
 			break;
 		}
 		return null;
