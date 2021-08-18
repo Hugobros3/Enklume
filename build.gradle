@@ -7,7 +7,7 @@ apply plugin: 'java'
 apply plugin: 'java-library'
 apply plugin: 'maven'
 
-version = '100'
+version = '1.1.0'
 
 group = 'io.xol.enklume'
 description = ' Java library for parsing Minecraft save files '
@@ -33,11 +33,6 @@ compileJava {
 	options.encoding = 'utf-8'
 }
 
-jar {
-	//I don't like numbers in my jars
-	version = null
-}
-
 compileJava.options.debugOptions.debugLevel = "source,lines,vars"
 
 configurations {
@@ -46,8 +41,6 @@ configurations {
 
 dependencies {
 	compile group: 'com.googlecode.json-simple', name: 'json-simple', version: '1.1.1'
-	
-	deployerJars "org.apache.maven.wagon:wagon-ssh:2.12" //<-- fuck this fuck this fuck this
 }
 
 task sourcesJar(type: Jar, dependsOn: classes) {
@@ -69,31 +62,4 @@ artifacts {
 javadoc {
 	//Our current javadoc isn't exactly too compliant :')
 	failOnError = false
-}
-
-//Create a properties.gradle with login credentials to use this.
-//Watch out: wagon-ssh is an old mess and WILL NOT TAKE EdDSA host keys
-//You MUST ask the server for one of those and replace whatever you had for it in known_hosts
-if(hasProperty('uploadUsername')) {
-	println 'Login credentials found'
-	uploadArchives {
-		repositories {
-				mavenDeployer {
-       				configuration = configurations.deployerJars	
-					
-					if(project.hasProperty('uploadPrivateKey')) {
-						println 'Found private key'
-						repository(url: "scp://xol.io/home/maven-user/maven-repo") {				
-							authentication(userName: uploadUsername, privateKey: uploadPrivateKey)
-		    				}
-					}
-					else {
-						println 'Found password'
-						repository(url: "scp://xol.io/home/maven-user/maven-repo") {				
-							authentication(userName: uploadUsername, password: uploadPassword)
-		    				}
-					}
-				}
-		}
-	}
 }
