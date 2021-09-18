@@ -2,12 +2,22 @@ package io.xol.enklume;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import io.xol.enklume.nbt.NBTFile;
 import io.xol.enklume.nbt.NBTString;
 import io.xol.enklume.nbt.NBTFile.CompressionScheme;
 
 public class MinecraftWorld {
+    public static final int OVERWORLD_ID = 0;
+    public static final int NETHER_ID = -1;
+    public static final int END_ID = 1;
+
     private final File folder;
     private final NBTFile nbtFile;
 
@@ -42,12 +52,40 @@ public class MinecraftWorld {
     }
 
     public MinecraftRegion getRegion(int regionCoordinateX, int regionCoordinateZ) {
-        File regionFile = new File(folder.getAbsolutePath() + "/region/r." + regionCoordinateX + "." + regionCoordinateZ + ".mca");
+        return getRegion(0, regionCoordinateX, regionCoordinateZ);
+    }
+
+    public MinecraftRegion getRegion(int dimensionId, int regionCoordinateX, int regionCoordinateZ) {
+        final String subfolder = dimensionId == 0 ? "" : "/DIM" + dimensionId;
+        File regionFile = new File(folder.getAbsolutePath() + subfolder + "/region/r." + regionCoordinateX + "." + regionCoordinateZ + ".mca");
 
         if (regionFile.exists()) {
             return new MinecraftRegion(regionFile);
         } else {
             return null;
         }
+    }
+
+    public List<File> getAllRegionFiles(int dimensionId) throws IOException {
+        final String subfolder = dimensionId == 0 ? "" : "/DIM" + dimensionId;
+        File regionFolder = new File(folder.getAbsolutePath() + subfolder + "/region");
+
+        if(regionFolder.exists()) {
+            return Files.walk(regionFolder.toPath(), 1)
+                    .filter(regionFile -> regionFile.endsWith(".mca"))
+                    .map(Path::toFile)
+                    .collect(Collectors.toList());
+        }
+        return new ArrayList<File>();
+    }
+
+    public List<Integer> getDimensions() throws IOException {
+        List<Integer> dimensions = Files.walk(this.folder.toPath(), 1)
+                .filter(Files::isDirectory)
+                .filter(subfolder -> subfolder.startsWith("DIM"))
+                .map(dimensionFolder -> Integer.parseInt(dimensionFolder.getFileName().toString().substring(3)))
+                .collect(Collectors.toList());
+        dimensions.add(0);
+        return dimensions;
     }
 }
