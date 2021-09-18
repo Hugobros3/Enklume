@@ -72,7 +72,7 @@ public class MinecraftWorld {
 
         if(regionFolder.exists()) {
             return Files.walk(regionFolder.toPath(), 1)
-                    .filter(regionFile -> regionFile.endsWith(".mca"))
+                    .filter(path -> path.getFileName().toString().endsWith(".mca"))
                     .map(Path::toFile)
                     .collect(Collectors.toList());
         }
@@ -82,7 +82,7 @@ public class MinecraftWorld {
     public List<Integer> getDimensions() throws IOException {
         List<Integer> dimensions = Files.walk(this.folder.toPath(), 1)
                 .filter(Files::isDirectory)
-                .filter(subfolder -> subfolder.startsWith("DIM"))
+                .filter(path -> path.getFileName().toString().startsWith("DIM"))
                 .map(dimensionFolder -> Integer.parseInt(dimensionFolder.getFileName().toString().substring(3)))
                 .collect(Collectors.toList());
         dimensions.add(0);
