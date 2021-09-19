@@ -7,6 +7,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.zip.DataFormatException;
 
 import io.xol.enklume.nbt.NBTFile;
 import io.xol.enklume.nbt.NBTString;
@@ -50,11 +51,11 @@ public class MinecraftWorld {
         return -(int) Math.floor(blockCoordinates / 512f) - 1;
     }
 
-    public MinecraftRegion getRegion(int regionCoordinateX, int regionCoordinateZ) {
+    public MinecraftRegion getRegion(int regionCoordinateX, int regionCoordinateZ) throws DataFormatException, IOException {
         return getRegion(0, regionCoordinateX, regionCoordinateZ);
     }
 
-    public MinecraftRegion getRegion(int dimensionId, int regionCoordinateX, int regionCoordinateZ) {
+    public MinecraftRegion getRegion(int dimensionId, int regionCoordinateX, int regionCoordinateZ) throws DataFormatException, IOException {
         final String subfolder = dimensionId == 0 ? "" : "/DIM" + dimensionId;
         File regionFile = new File(folder.getAbsolutePath() + subfolder + "/region/r." + regionCoordinateX + "." + regionCoordinateZ + ".mca");
 
