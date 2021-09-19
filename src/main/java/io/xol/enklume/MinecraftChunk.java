@@ -9,7 +9,7 @@ import java.io.ByteArrayInputStream;
 
 public class MinecraftChunk {
     NBTCompound root = null;
-    int sectionsMap[] = new int[16];
+    int[] sectionsMap = new int[16];
 
     public final int x;
     public final int z;

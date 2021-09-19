@@ -2,6 +2,7 @@ package io.xol.enklume.nbt;
 
 import java.io.IOException;
 import java.io.DataInputStream;
+import java.nio.charset.StandardCharsets;
 
 public class NBTString extends NBTNamed {
     public String data;
@@ -16,7 +17,7 @@ public class NBTString extends NBTNamed {
         byte[] n = new byte[size];
         try {
             is.readFully(n);
-            data = new String(n, "UTF-8");
+            data = new String(n, StandardCharsets.UTF_8);
         } catch (Exception e) {
             e.printStackTrace();
         }

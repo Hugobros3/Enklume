@@ -13,7 +13,7 @@ public class SignParseUtil {
     /**
      * I needed this lib to be thread-safe, so I put those in
      */
-    private static ThreadLocal<JSONParser> threadSafeJsonParser = new ThreadLocal<JSONParser>() {
+    private static final ThreadLocal<JSONParser> threadSafeJsonParser = new ThreadLocal<>() {
 
         @Override
         protected JSONParser initialValue() {

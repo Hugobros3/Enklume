@@ -1,30 +1,15 @@
 package io.xol.enklume;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.IOException;
-import java.io.RandomAccessFile;
+import java.io.*;
 import java.util.zip.Inflater;
 
 public class MinecraftRegion {
-
-    /**
-     * Not really an unit test
-     */
-    public static void main(String a[]) {
-        MinecraftRegion r = new MinecraftRegion(new File("world/region/r.0.1.mca"));//"r.0.0.mca.in"));
-        MinecraftChunk c = r.getChunk(22, 1);
-        System.out.println("------------");
-        int block = c.getBlockID(5, 6, 9);
-        System.out.println(block);
-        r.close();
-    }
 
     int[] locations = new int[1024];
     int[] sizes = new int[1024];
 
     RandomAccessFile is;
-    private MinecraftChunk[][] chunks = new MinecraftChunk[32][32];
+    private final MinecraftChunk[][] chunks = new MinecraftChunk[32][32];
 
     public MinecraftRegion(File regionFile) {
         try {
@@ -102,13 +87,5 @@ public class MinecraftRegion {
             }
         }
         return new MinecraftChunk(x, z);
-    }
-
-    public void close() {
-        try {
-            is.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 }

@@ -2,6 +2,7 @@ package io.xol.enklume.nbt;
 
 import java.io.DataInputStream;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 
 public class NBTNamed extends NBTag {
 
@@ -17,7 +18,7 @@ public class NBTNamed extends NBTag {
             byte[] n = new byte[nameSize];
             try {
                 is.readFully(n);
-                tagName = new String(n, "UTF-8");
+                tagName = new String(n, StandardCharsets.UTF_8);
                 //System.out.println("read tag named :"+tagName);
             } catch (Exception e) {
                 e.printStackTrace();

@@ -8,7 +8,7 @@ import java.util.Map;
 
 public class NBTCompound extends NBTNamed implements Iterable<NBTNamed> {
 
-    Map<String, NBTNamed> tags = new HashMap<String, NBTNamed>();
+    Map<String, NBTNamed> tags = new HashMap<>();
 
     @Override
     void feed(DataInputStream is) throws IOException {
