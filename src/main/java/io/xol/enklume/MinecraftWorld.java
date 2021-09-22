@@ -79,13 +79,13 @@ public class MinecraftWorld {
         return new ArrayList<>();
     }
 
-    public List<Integer> getDimensions() throws IOException {
-        List<Integer> dimensions = Files.walk(this.folder.toPath(), 1)
+    public List<Integer> getDimensionIds() throws IOException {
+        List<Integer> dimensionIds = Files.walk(this.folder.toPath(), 1)
                 .filter(Files::isDirectory)
                 .filter(path -> path.getFileName().toString().startsWith("DIM"))
                 .map(dimensionFolder -> Integer.parseInt(dimensionFolder.getFileName().toString().substring(3)))
                 .collect(Collectors.toList());
-        dimensions.add(0);
-        return dimensions;
+        dimensionIds.add(0);
+        return dimensionIds;
     }
 }
