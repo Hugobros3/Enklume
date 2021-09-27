@@ -9,3 +9,4 @@ gradle*
 .project
 .classpath
 .settings*
+.idea/

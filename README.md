@@ -17,7 +17,7 @@ For a better example on how to use this library, it is used in the (yet unreleas
 
 ### Additions by me (SinTh0r4s)
 
-I require slightly more functionality that sill fits this library. This fork is used in [VisualProspecting](https://github.com/SinTh0r4s/VisualProspecting) to analyze played world and recover lost meta information about chunks.
+I require slightly more functionality that sill fits this library. This fork supports a world scan approach and is not just suited to inquire information about specific locations. This lib is used in [VisualProspecting](https://github.com/SinTh0r4s/VisualProspecting) to analyze played world and recover lost meta information about chunks.
 
 ### Background
 
