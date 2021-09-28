@@ -80,4 +80,8 @@ public class MinecraftRegion {
         }
         return new MinecraftChunk(x, z);
     }
+
+    public void close() throws IOException {
+        is.close();
+    }
 }
