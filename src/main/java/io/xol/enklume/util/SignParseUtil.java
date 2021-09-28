@@ -13,14 +13,7 @@ public class SignParseUtil {
     /**
      * I needed this lib to be thread-safe, so I put those in
      */
-    private static ThreadLocal<JSONParser> threadSafeJsonParser = new ThreadLocal<JSONParser>() {
-
-        @Override
-        protected JSONParser initialValue() {
-            return new JSONParser();
-        }
-
-    };
+    private static final ThreadLocal<JSONParser> threadSafeJsonParser = ThreadLocal.withInitial(JSONParser::new);
 
     /**
      * Sign data is a mess of legacy and incompatible formats, the same save can contain multiple ways of formatting this data, this method should return
