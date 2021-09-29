@@ -9,7 +9,7 @@ public class NBTList extends NBTNamed {
     int type;
     int number;
 
-    public List<NBTNamed> elements = new ArrayList<NBTNamed>();
+    public List<NBTNamed> elements = new ArrayList<>();
 
     @Override
     void feed(DataInputStream is) throws IOException {
@@ -26,9 +26,10 @@ public class NBTList extends NBTNamed {
                 tag.feed(is);
                 elements.add((NBTNamed) tag);
             }
-        } else {
-            //System.out.println("Warning : found a NBTList of TAG_END !");
         }
+        /*else {
+            System.out.println("Warning : found a NBTList of TAG_END !");
+        }*/
     }
 
     //@Override

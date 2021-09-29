@@ -16,7 +16,6 @@ public class NBTByteArray extends NBTNamed {
         size += is.read() << 16;
         size += is.read() << 8;
         size += is.read();
-        //System.out.println("byte array of "+size+"b");
         data = new byte[size];
         try {
             is.read(data);
