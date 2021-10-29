@@ -82,10 +82,23 @@ public class MinecraftWorld {
     public List<Integer> getDimensionIds() throws IOException {
         List<Integer> dimensionIds = Files.walk(this.folder.toPath(), 1)
                 .filter(Files::isDirectory)
-                .filter(path -> path.getFileName().toString().startsWith("DIM"))
-                .map(dimensionFolder -> Integer.parseInt(dimensionFolder.getFileName().toString().substring(3)))
+                .map(path -> path.getFileName().toString())
+                .filter(path -> path.startsWith("DIM"))
+                .map(path -> path.substring(3))
+                .filter(dimensionId -> isInteger(dimensionId))
+                .map(dimensionId -> Integer.parseInt(dimensionId))
                 .collect(Collectors.toList());
         dimensionIds.add(0);
         return dimensionIds;
+    }
+
+    private boolean isInteger(String input) {
+        try {
+            Integer.parseInt(input);
+            return true;
+        }
+        catch (NumberFormatException e) {
+            return false;
+        }
     }
 }
