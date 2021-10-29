@@ -83,9 +83,20 @@ public class MinecraftWorld {
         List<Integer> dimensionIds = Files.walk(this.folder.toPath(), 1)
                 .filter(Files::isDirectory)
                 .filter(path -> path.getFileName().toString().startsWith("DIM"))
+                .filter(path -> isInteger(path.getFileName().toString()))
                 .map(dimensionFolder -> Integer.parseInt(dimensionFolder.getFileName().toString().substring(3)))
                 .collect(Collectors.toList());
         dimensionIds.add(0);
         return dimensionIds;
+    }
+
+    private boolean isInteger(String input) {
+        try {
+            Integer.parseInt(input);
+            return true;
+        }
+        catch (NumberFormatException e) {
+            return false;
+        }
     }
 }
