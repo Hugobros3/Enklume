@@ -1,3 +1,5 @@
+import org.gradle.kotlin.dsl.`maven-publish`
+
 /*
  * Enklume
  * Java library for parsing Minecraft save files 
@@ -6,6 +8,7 @@
 plugins {
 	java
 	`java-library`
+	`maven-publish`
 }
 
 tasks.register<Javadoc>("cancer") {
@@ -39,9 +42,13 @@ compileJava.apply {
 
 compileJava.options.debugOptions.debugLevel = "source,lines,vars"
 
-/*configurations {
-	deployerJars
-}*/
+publishing {
+	publications {
+		create<MavenPublication>("maven") {
+			from(components["java"])
+		}
+	}
+}
 
 dependencies {
 	implementation("com.googlecode.json-simple", name = "json-simple", version = "1.1.1")
