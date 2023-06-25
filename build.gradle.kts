@@ -11,7 +11,8 @@ plugins {
 	`maven-publish`
 }
 
-tasks.register<Javadoc>("cancer") {
+val javadoc: Javadoc by tasks
+javadoc.apply {
 	isFailOnError = false
 	source = sourceSets.main.get().allJava
 }
